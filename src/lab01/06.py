@@ -16,4 +16,4 @@ for n in range(N):
     if part == False:
         count2 += 1
 
-print(f'Очно: {count}, Заочное: {count2}')
+print(count, count2)
