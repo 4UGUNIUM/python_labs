@@ -46,7 +46,7 @@ python src/lab01/01_greeting.py
 
 ### Результат работы программы
 
-![Задание 1 — Привет и возраст](images/lab01/01_greeting.png)
+![Задание 1 — Привет и возраст](../../images/lab01/01_greeting.png)
 
 ---
 
@@ -69,7 +69,7 @@ python src/lab01/02_sum_avg.py
 
 ### Результат работы программы
 
-![Задание 2 — Сумма и среднее](images/lab01/02_sum_avg.png)
+![Задание 2 — Сумма и среднее](../../images/lab01/02_sum_avg.png)
 
 ---
 
@@ -109,7 +109,7 @@ python src/lab01/03_discount_vat.py
 
 ### Результат работы программы
 
-![Задание 3 — Чек: скидка и НДС](images/lab01/03_discount_vat.png)
+![Задание 3 — Чек: скидка и НДС](../../images/lab01/03_discount_vat.png)
 
 ---
 
@@ -133,7 +133,7 @@ python src/lab01/04_minutes_to_hhmm.py
 
 ### Результат работы программы
 
-![Задание 4 — Минуты в часы и минуты](images/lab01/04_minutes_to_hhmm.png)
+![Задание 4 — Минуты в часы и минуты](../../images/lab01/04_minutes_to_hhmm.png)
 
 ---
 
@@ -156,7 +156,7 @@ python src/lab01/05_initials_and_len.py
 
 ### Результат работы программы
 
-![Задание 5 — Инициалы и длина строки](images/lab01/05_initials_and_len.png)
+![Задание 5 — Инициалы и длина строки](../../images/lab01/05_initials_and_len.png)
 
 ---
 
@@ -191,7 +191,7 @@ python src/lab01/06.py
 
 ### Результат работы программы
 
-![Задание 6 — Подсчёт участников](images/lab01/06.png)
+![Задание 6 — Подсчёт участников](../../images/lab01/06.png)
 
 ---
 
@@ -216,7 +216,7 @@ python src/lab01/07.py
 
 ### Результат работы программы
 
-![Задание 7 — Расшифровка строки](images/lab01/07.png)
+![Задание 7 — Расшифровка строки](../../images/lab01/07.png)
 
 ---
 
