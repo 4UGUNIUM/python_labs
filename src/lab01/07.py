@@ -1,4 +1,4 @@
-N = input('Зашифрованная строка: ')
+N = input('in: ')
 
 First = ''
 Second = ''
@@ -22,7 +22,7 @@ result = ''
 for n in range(Fp, len(N), Interval):
     result += N[n]
 
-print(result)
+print(f'out: {result}')
 
 
 
