@@ -1,10 +1,10 @@
-N = int(input())
+N = int(input('in_1: '))
 
 count = 0
 count2 = 0
 
 for n in range(N):
-    person = input().split()
+    person = input(f'in_{n+2}: ').split()
 
     surname = person[0].upper()
     name = person[1].upper()
@@ -16,4 +16,4 @@ for n in range(N):
     if part == False:
         count2 += 1
 
-print(count, count2)
+print(f'out: {count}, {count2}')
