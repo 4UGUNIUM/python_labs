@@ -231,16 +231,6 @@ python src/lab01/07.py
 
 ## Запуск программ
 
-Для запуска отдельного задания необходимо находиться в корневой директории репозитория `python_labs`.
-
-Например:
-
 ```bash
 python src/lab01/01_greeting.py
-```
-
-Для Windows также можно использовать:
-
-```powershell
-py src/lab01/01_greeting.py
 ```
