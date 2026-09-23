@@ -2,10 +2,17 @@
 
 def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     """Возвращает минимальный и максимальный элементы списка."""
-    if len(nums)==0:
+    if len(nums) == 0:
         raise ValueError("Пустой список")
-    else:
-        return min(nums), max(nums)
+
+    min_num = nums[0]
+    max_num = nums[0]
+
+    for num in nums[1:]:
+        if num < min_num: min_num = num
+        if num > max_num: max_num = num
+
+    return min_num, max_num
 
 # print(min_max([3, -1, 5, 5, 0]))
 # print(min_max([42]))
@@ -19,10 +26,22 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
 
 def unique_sorted(nums: list[float | int]) -> list[float | int]:
     """Возвращает отсортированный список уникальных элементов."""
-    if len(nums)==0:
-        return []
-    else:
-        return sorted(set(nums))
+    result = []
+
+    for num in nums:
+        if num not in result:
+            result.append(num)
+
+    for i in range(1, len(result)):
+        current = result[i]
+        j = i - 1
+        while j >= 0 and result[j] > current:
+            result[j + 1] = result[j]
+            j -= 1
+
+        result[j + 1] = current
+
+    return result
 
 # print(unique_sorted([3, 1, 2, 1, 3]))
 # print(unique_sorted([]))

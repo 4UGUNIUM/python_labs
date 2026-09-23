@@ -3,7 +3,7 @@ def format_record(rec: tuple[str, str, float]) -> str:
 
     if not rec[0].strip(): raise ValueError("Пустое ФИО")
     if not rec[1].strip(): raise ValueError("Пустая группа")
-    if not isinstance(rec[2], (int, float)): raise TypeError("некооректный тип GPA")
+    if not isinstance(rec[2], (int, float)) or rec[2]>5 or rec[2]<0: raise TypeError("некооректный тип GPA")
 
     # name
     FIO = rec[0]
