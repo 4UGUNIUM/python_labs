@@ -1,3 +1,7 @@
+# Contacts
+
+**Telegram:** [@VDNewGen](https://t.me/VDNewGen)
+
 # Python Labs
 
 Репозиторий с лабораторными работами по Python.
