@@ -12,13 +12,11 @@ def format_record(rec: tuple[str, str, float]) -> str:
 
     if len(FIOsplited) == 3:
         name = FIOsplited[0][0].upper() + FIOsplited[0][1:] + " " + initials[1] + "." + initials[2] + "."
-
     if len(FIOsplited) == 2:
         name = FIOsplited[0][0].upper() + FIOsplited[0][1:] + " " + initials[1] + "."
-
+    
     # group
     group = rec[1]
-
     # gpa
     gpa = rec[2]
 
