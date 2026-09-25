@@ -1,5 +1,7 @@
 def format_record(rec: tuple[str, str, float]) -> str:
     """Форматирует запись студента."""
+    if type(rec)!=tuple:
+        raise TypeError("Некорректный тип вводных данных")
 
     if not rec[0].strip(): raise ValueError("Пустое ФИО")
     if not rec[1].strip(): raise ValueError("Пустая группа")
