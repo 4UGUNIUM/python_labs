@@ -1,6 +1,6 @@
 from src.lib.text import normalize, tokenize, top_n, count_freq
 
-TABLE = 0 #Для включения режима таблички
+TABLE = 1 #Для включения режима таблички
 
 
 def text_stat(text: str):
