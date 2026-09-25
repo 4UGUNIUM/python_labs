@@ -1,4 +1,13 @@
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+
+
+    if not isinstance(text, str):
+        raise TypeError("Текст должен быть строкой")
+
+    if not text.strip():
+        raise ValueError("Передан пустой текст")
+   
+   
     Comtext = text
     if yo2e:
         Comtext = Comtext.replace("ё", "е").replace("Ё", "Е")
@@ -14,6 +23,11 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 # print(normalize("  двойные   пробелы  "))# двойные пробелы
 
 def tokenize(text: str) -> list[str]:
+    
+    if not isinstance(text, str):
+        raise TypeError("Текст должен быть строкой")
+    
+    
     Comtext = text
     Comtext = normalize(Comtext)
     result = ""
@@ -29,6 +43,9 @@ def tokenize(text: str) -> list[str]:
 
         count += 1
 
+    if not result.split():
+        raise ValueError("В тексте не найдено слов")
+
     return result.split()
 
 # print(tokenize("привет мир"))  # ["привет", "мир"]
@@ -38,6 +55,14 @@ def tokenize(text: str) -> list[str]:
 # print(tokenize("emoji 😀 не слово"))  # ["emoji", "не", "слово"]
 
 def count_freq(tokens: list[str]) -> dict[str, int]:
+    
+    if not isinstance(tokens, list):
+        raise TypeError("Ожидался список слов")
+
+    if not tokens:
+        raise ValueError("Список слов пуст")
+    
+    
     t = tokens
     result = {}
     for words in t:
@@ -49,8 +74,25 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
 # print(count_freq(["bb", "aa", "bb", "aa", "cc"]))  # {"aa": 2, "bb": 2, "cc": 1}
 
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+    
+    if not isinstance(freq, dict):
+        raise TypeError("Ожидался словарь частот")
+
+    if not freq:
+        raise ValueError("Словарь частот пуст")
+
+    if n <= 0:
+        raise ValueError("Количество слов должно быть больше нуля")
+    
+    
+    
     result = list(freq.items()) #.items - делает словарь парами(слово-колво)
     result.sort(key=lambda x: (-x[1], x[0]))
+    
+    
+    if not result:
+        raise ValueError("top_n не вернула результат")
+    
     return result[:n]
 
 # print(top_n({"a": 3, "b": 2, "c": 1}, n=2))  # [('a', 3), ('b', 2)]

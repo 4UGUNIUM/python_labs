@@ -1,3 +1,8 @@
+#ЗАПУСК ИЗ КОРНЯ Py_labs:  python -m src.lab03.text_stats
+
+
+
+
 from src.lib.text import normalize, tokenize, top_n, count_freq
 
 TABLE = 1 #Для включения режима таблички
@@ -9,6 +14,10 @@ def text_stat(text: str):
     tokens = tokenize(normalize(t))
     freq = count_freq(tokens)
     top = top_n(freq)
+
+    if not top:
+        raise ValueError("Не удалось получить топ слов")
+
 
     print(f"Всего слов: {len(tokens)}")
     print(f"Уникальных слов: {len(freq)}")
