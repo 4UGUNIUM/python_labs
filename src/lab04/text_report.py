@@ -4,11 +4,15 @@ from pathlib import Path
     
     
 def text_report(path: str | Path, out: str | Path, encoding: str = "utf-8"):
-    text = read_text(path)
-    normaltext = normalize(text)
+    text = read_text(path, encoding=encoding)
+    
     tokens = tokenize(normalize(text))
     freq = count_freq(tokens)
     top = top_n(freq)
+
+    lib = list(freq.items())
+    lib.sort(key = lambda x:(-x[1],x[0]))
+
 
     if not top:
         raise ValueError("Не удалось получить топ слов")
@@ -22,7 +26,7 @@ def text_report(path: str | Path, out: str | Path, encoding: str = "utf-8"):
     
     
     
-    write_csv(top, out, ["word", "count"])
+    write_csv(lib, out, ["word", "count"])
 
 
     

@@ -1,14 +1,21 @@
-from pathlib import Path
+
 
 import csv
 from pathlib import Path
-from typing import Iterable, Sequence
+
 
 
 
 
 
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:
+    
+    """
+    Читает текстовый файл и возвращает его содержимое одной строкой.
+
+    Для другой кодировки можно передать, например, encoding="cp1251".
+    """
+    
     p = Path(path)
     return p.read_text(encoding=encoding)
 
@@ -17,6 +24,7 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 
 
 def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+     """Записывает строки в CSV-файл."""
      p = Path(path)
      
      if rows:
@@ -40,6 +48,6 @@ def ensure_parent_dir(path: str | Path) -> None:
 
 
 
-txt = read_text("src/data/lab04/input.txt")  # должен вернуть строку
-write_csv([("word","count"),("test",3)], "src/data/check.csv")  # создаст CSV
-# print(txt)
+# txt = read_text("src/data/lab04/input.txt")  # должен вернуть строку
+# write_csv([("word","count"),("test",3)], "src/data/check.csv")  # создаст CSV
+# # print(txt)
