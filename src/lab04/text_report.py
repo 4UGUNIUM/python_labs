@@ -22,7 +22,7 @@ def text_report(path: str | Path, out: str | Path, encoding: str = "utf-8"):
     
     
     
-    write_csv(top, out)
+    write_csv(top, out, ["word", "count"])
 
 
     
