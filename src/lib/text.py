@@ -1,101 +1,45 @@
+"""Чистые функции для нормализации текста и подсчёта частот слов."""
+
+import re
+
+
 def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
-
-
+    """Нормализовать регистр, ``ё`` и пробельные символы в тексте."""
     if not isinstance(text, str):
-        raise TypeError("Текст должен быть строкой")
-
-    if not text.strip():
-        raise ValueError("Передан пустой текст")
-   
-   
-    Comtext = text
+        raise TypeError("text должен быть строкой")
+    result = text.casefold() if casefold else text.lower()
     if yo2e:
-        Comtext = Comtext.replace("ё", "е").replace("Ё", "Е")
-    if casefold:
-        Comtext = Comtext.casefold()
+        result = result.replace("ё", "е")
+    result = result.replace("\t", " ").replace("\r", " ").replace("\n", " ")
+    return " ".join(result.split())
 
-    Comtext = ' '.join(Comtext.split())
-    return Comtext
-
-# print(normalize("ПрИвЕт\nМИр\t"))# привет мир
-# print(normalize("ёжик, Ёлка", yo2e=True))# ежик, елка
-# print(normalize("Hello\r\nWorld"))# hello world
-# print(normalize("  двойные   пробелы  "))# двойные пробелы
 
 def tokenize(text: str) -> list[str]:
-    
+    r"""Вернуть слова по шаблону ``\w+(?:-\w+)*``."""
     if not isinstance(text, str):
-        raise TypeError("Текст должен быть строкой")
-    
-    
-    Comtext = text
-    Comtext = normalize(Comtext)
-    result = ""
-    count = 0
+        raise TypeError("text должен быть строкой")
+    return re.findall(r"\w+(?:-\w+)*", text, flags=re.UNICODE)
 
-    for i in Comtext:
-        if i.isalnum() or (
-            (i == "-" or i == '_')
-            and count > 0 and count + 1 < len(Comtext)
-            and Comtext[count - 1].isalnum() and Comtext[count + 1].isalnum()
-        ): result += i
-        else:result += " "
-
-        count += 1
-
-    if not result.split():
-        raise ValueError("В тексте не найдено слов")
-
-    return result.split()
-
-# print(tokenize("привет мир"))  # ["привет", "мир"]
-# print(tokenize("hello,world!!!"))  # ["hello", "world"]
-# print(tokenize("по-настоящему круто"))  # ["по-настоящему", "круто"]
-# print(tokenize("2025 год"))  # ["2025", "год"]
-# print(tokenize("emoji 😀 не слово"))  # ["emoji", "не", "слово"]
 
 def count_freq(tokens: list[str]) -> dict[str, int]:
-    
+    """Подсчитать, сколько раз встречается каждый токен."""
     if not isinstance(tokens, list):
-        raise TypeError("Ожидался список слов")
-
-    if not tokens:
-        raise ValueError("Список слов пуст")
-    
-    
-    t = tokens
-    result = {}
-    for words in t:
-        result[words] = t.count(words)
+        raise TypeError("tokens должен быть списком")
+    if not all(isinstance(token, str) for token in tokens):
+        raise TypeError("каждый токен должен быть строкой")
+    result: dict[str, int] = {}
+    for token in tokens:
+        result[token] = result.get(token, 0) + 1
     return result
 
 
-# print(count_freq(["a", "b", "a", "c", "b", "a"]))  # {"a": 3, "b": 2, "c": 1}
-# print(count_freq(["bb", "aa", "bb", "aa", "cc"]))  # {"aa": 2, "bb": 2, "cc": 1}
-
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
-    
+    """Вернуть первые ``n`` пар по частоте и алфавиту слова."""
     if not isinstance(freq, dict):
-        raise TypeError("Ожидался словарь частот")
-
-    if not freq:
-        raise ValueError("Словарь частот пуст")
-
-    if n <= 0:
-        raise ValueError("Количество слов должно быть больше нуля")
-    
-    
-    
-    result = list(freq.items()) #.items - делает словарь парами(слово-колво)
-    result.sort(key=lambda x: (-x[1], x[0]))
-    
-    
-    if not result:
-        raise ValueError("top_n не вернула результат")
-    
-    return result[:n]
-
-# print(top_n({"a": 3, "b": 2, "c": 1}, n=2))  # [('a', 3), ('b', 2)]
-# print(top_n({"bb": 2, "aa": 2, "cc": 1}, n=2))  # [('aa', 2), ('bb', 2)]
-
-
+        raise TypeError("freq должен быть словарём")
+    if not isinstance(n, int) or n < 0:
+        raise ValueError("n должно быть неотрицательным целым числом")
+    if not all(isinstance(word, str) and isinstance(count, int)
+               for word, count in freq.items()):
+        raise TypeError("слова должны быть строками, а частоты — целыми числами")
+    return sorted(freq.items(), key=lambda item: (-item[1], item[0]))[:n]

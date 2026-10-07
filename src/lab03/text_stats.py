@@ -1,40 +1,43 @@
-#ЗАПУСК ИЗ КОРНЯ Py_labs:  python -m src.lab03.text_stats
+"""Статистика слов во входном тексте."""
+
+import os
+import sys
+from pathlib import Path
+
+try:
+    from src.lib.text import count_freq, normalize, tokenize, top_n
+except ModuleNotFoundError:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from lib.text import count_freq, normalize, tokenize, top_n
 
 
+TABLE = os.getenv("TEXT_STATS_TABLE", "0") == "1"
 
 
-from src.lib.text import normalize, tokenize, top_n, count_freq
-
-TABLE = 1 #Для включения режима таблички
-
-
-def text_stat(text: str):
-    t = text
-
-    tokens = tokenize(normalize(t))
-    freq = count_freq(tokens)
-    top = top_n(freq)
-
-    if not top:
-        raise ValueError("Не удалось получить топ слов")
-
-
+def text_stat(text: str, *, table: bool = TABLE) -> None:
+    """Напечатать базовую статистику для всего переданного текста."""
+    tokens = tokenize(normalize(text))
+    frequencies = count_freq(tokens)
+    popular = top_n(frequencies)
     print(f"Всего слов: {len(tokens)}")
-    print(f"Уникальных слов: {len(freq)}")
+    print(f"Уникальных слов: {len(frequencies)}")
     print("Топ-5:")
-
-    if TABLE:
-        max_word_len = max( max((len(i[0]) for i in top), default=0), len("Слово") )
-
-        print("Слово" + " " * (max_word_len - len("Слово")) + " | частота")
-        print("-" * (max_word_len + 11))
-
-        for i in top:
-            print(i[0] + " " * (max_word_len - len(i[0])) + f" | {i[1]}")
-
+    if table:
+        width = max((len(word) for word, _ in popular), default=0)
+        width = max(width, len("слово"))
+        print(f"{'слово':<{width}} | частота")
+        print("-" * (width + 10))
+        for word, count in popular:
+            print(f"{word:<{width}} | {count}")
     else:
-        for i in top:
-            print(f"{i[0]}:{i[1]}")
+        for word, count in popular:
+            print(f"{word}:{count}")
 
-text = input()
-text_stat(text)
+
+def main() -> None:
+    """Прочитать stdin до EOF и вывести статистику."""
+    text_stat(sys.stdin.read())
+
+
+if __name__ == "__main__":
+    main()
