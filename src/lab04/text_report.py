@@ -7,9 +7,14 @@ import argparse
 def text_report(path: str | Path, out: str | Path, encoding: str = "utf-8"):
     """принимает на вход файл с текстом и создает csv-файл-отчет"""
     text = read_text(path, encoding=encoding)
-    
-    if len(text)==0: write_csv([], out, ["word", "count"])
-    tokens = tokenize(normalize(text))
+
+    tokens = tokenize(normalize(text)) if text.strip() else []
+    if not tokens:
+        write_csv([], out, ("word", "count"))
+        print("Всего слов: 0")
+        print("Уникальных слов: 0")
+        print("Топ-5:")
+        return
     freq = count_freq(tokens)
     top = top_n(freq)
 
@@ -19,9 +24,9 @@ def text_report(path: str | Path, out: str | Path, encoding: str = "utf-8"):
 
     if not top: raise ValueError("Не удалось получить топ слов")
 
-    print("Всего слов: ", len(tokens))
-    print('Уникальных слов: ', len(set(tokens)))
-    print('топ-5: ')
+    print(f"Всего слов: {len(tokens)}")
+    print(f"Уникальных слов: {len(freq)}")
+    print("Топ-5:")
     for i in top:
         print(f"{i[0]}:{i[1]}")
 
@@ -34,7 +39,9 @@ def multiple_text_report(paths: list[str], per_file: str | Path, total: str | Pa
 
     for path in paths:
         text = read_text(path, encoding=encoding)
-        tokens = tokenize(normalize(text))
+        tokens = tokenize(normalize(text)) if text.strip() else []
+        if not tokens:
+            continue
         freq = count_freq(tokens)
 
         # Данные отдельно по каждому файлу
