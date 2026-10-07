@@ -48,10 +48,15 @@ assert top_n({"bb": 2, "aa": 2, "cc": 1}, 2) == [
 ]
 ```
 
-Результаты проверок: [normalize](../../images/lab03/img01.png),
-[tokenize](../../images/lab03/img02.png),
-[count_freq](../../images/lab03/img03.png),
-[top_n](../../images/lab03/img04.png).
+Результаты проверок:
+
+![Проверка normalize](../../images/lab03/img01.png)
+
+![Проверка tokenize](../../images/lab03/img02.png)
+
+![Проверка count_freq](../../images/lab03/img03.png)
+
+![Проверка top_n](../../images/lab03/img04.png)
 
 ## Задание B — `src/lab03/text_stats.py`
 
@@ -93,8 +98,11 @@ $env:TEXT_STATS_TABLE = "1"
 "Привет, мир! Привет!!!" | python -m src.lab03.text_stats
 ```
 
-Скриншоты запуска: [обычный режим](../../images/lab03/img05.png),
-[табличный режим](../../images/lab03/img06.png).
+Скриншоты запуска:
+
+![Обычный режим text_stats.py](../../images/lab03/img05.png)
+
+![Табличный режим text_stats.py](../../images/lab03/img06.png)
 
 ## Вывод
 
