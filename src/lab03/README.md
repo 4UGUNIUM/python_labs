@@ -162,7 +162,10 @@ text_stat(text)
 Запуск из корня проекта:
 
 ```powershell
-"Привет, мир! Привет!!!" | python -m src.lab03.text_stats
+python -m src.lab03.text_stats
+```
+```powershell
+"Привет, мир! Привет!!!" 
 ```
 
 Результат:
