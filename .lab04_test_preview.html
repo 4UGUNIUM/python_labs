@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<title>ЛР4 — проверка запусков</title>
+<style>
+  body { margin: 0; padding: 32px; background: #eef1f5; color: #202938; font: 17px/1.45 Segoe UI, Arial, sans-serif; }
+  main { max-width: 1040px; margin: auto; }
+  section { min-height: 700px; margin-bottom: 32px; padding: 32px; background: white; border: 1px solid #d7dce4; border-radius: 10px; box-sizing: border-box; }
+  h1 { margin: 0 0 8px; font-size: 30px; }
+  h2 { margin: 24px 0 8px; font-size: 20px; }
+  p { margin: 4px 0 14px; }
+  pre { margin: 0 0 12px; padding: 15px 18px; overflow-wrap: anywhere; white-space: pre-wrap; background: #f3f5f8; border-left: 4px solid #4476ba; border-radius: 5px; color: #142235; font: 16px/1.5 Consolas, monospace; }
+  small { color: #596779; }
+</style>
+<main>
+  <section id="single">
+    <h1>ЛР4 — один входной файл</h1>
+    <p><small>Вход: src/data/lab04/b.txt</small></p>
+    <pre>Привет, привет!</pre>
+    <h2>Команда</h2>
+    <pre>python -m src.lab04.text_report --in src/data/lab04/b.txt --out src/data/lab04/report_single.csv</pre>
+    <h2>Вывод программы</h2>
+    <pre>Всего слов: 2
+Уникальных слов: 1
+Топ-5:
+привет:2</pre>
+    <h2>Содержимое report_single.csv</h2>
+    <pre>word,count
+привет,2</pre>
+  </section>
+  <section id="multiple">
+    <h1>ЛР4 — два входных файла ★</h1>
+    <p><small>Входы: src/data/lab04/a.txt и b.txt</small></p>
+    <pre>a.txt: Привет мир
+b.txt: Привет, привет!</pre>
+    <h2>Команда</h2>
+    <pre>python -m src.lab04.text_report --in src/data/lab04/a.txt src/data/lab04/b.txt --per-file src/data/lab04/report_per_file.csv --total src/data/lab04/report_total.csv</pre>
+    <h2>Содержимое report_per_file.csv</h2>
+    <pre>file,word,count
+a.txt,мир,1
+a.txt,привет,1
+b.txt,привет,2</pre>
+    <h2>Содержимое report_total.csv</h2>
+    <pre>word,count
+привет,3
+мир,1</pre>
+  </section>
+</main>
+</html>
