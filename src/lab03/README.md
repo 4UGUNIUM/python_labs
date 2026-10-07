@@ -23,6 +23,61 @@ def count_freq(tokens: list[str]) -> dict[str, int]
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]
 ```
 
+### Полный код `src/lib/text.py`
+
+```python
+import re
+
+
+def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if not isinstance(text, str):
+        raise TypeError("Текст должен быть строкой")
+
+    if not text.strip():
+        raise ValueError("Передан пустой текст")
+
+    Comtext = text
+    if yo2e:
+        Comtext = Comtext.replace("ё", "е").replace("Ё", "Е")
+    if casefold:
+        Comtext = Comtext.casefold()
+
+    Comtext = " ".join(Comtext.split())
+    return Comtext
+
+
+def tokenize(text: str) -> list[str]:
+    if not isinstance(text, str):
+        raise TypeError("Текст должен быть строкой")
+
+    return re.findall(r"\w+(?:-\w+)*", text)
+
+
+def count_freq(tokens: list[str]) -> dict[str, int]:
+    if not isinstance(tokens, list):
+        raise TypeError("Ожидался список слов")
+    if not tokens:
+        raise ValueError("Список слов пуст")
+
+    result = {}
+    for word in tokens:
+        result[word] = tokens.count(word)
+    return result
+
+
+def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+    if not isinstance(freq, dict):
+        raise TypeError("Ожидался словарь частот")
+    if not freq:
+        raise ValueError("Словарь частот пуст")
+    if n <= 0:
+        raise ValueError("Количество слов должно быть больше нуля")
+
+    result = list(freq.items())
+    result.sort(key=lambda item: (-item[1], item[0]))
+    return result[:n]
+```
+
 `normalize` применяет `casefold()` (или `lower()`), заменяет `ё` на `е`,
 превращает `\\t`, `\\r`, `\\n` в пробелы, схлопывает пробелы и обрезает края.
 `tokenize` использует шаблон `\\w+(?:-\\w+)*`: цифры и подчёркивания
@@ -59,6 +114,41 @@ assert top_n({"bb": 2, "aa": 2, "cc": 1}, 2) == [
 ![Проверка top_n](../../images/lab03/img04.png)
 
 ## Задание B — `src/lab03/text_stats.py`
+
+### Полный код `src/lab03/text_stats.py`
+
+```python
+from src.lib.text import normalize, tokenize, top_n, count_freq
+
+TABLE = 1
+
+
+def text_stat(text: str):
+    tokens = tokenize(normalize(text))
+    freq = count_freq(tokens)
+    top = top_n(freq)
+
+    print(f"Всего слов: {len(tokens)}")
+    print(f"Уникальных слов: {len(freq)}")
+    print("Топ-5:")
+
+    if TABLE:
+        max_word_len = max(
+            max((len(word) for word, _ in top), default=0),
+            len("Слово"),
+        )
+        print("Слово" + " " * (max_word_len - len("Слово")) + " | частота")
+        print("-" * (max_word_len + 11))
+        for word, count in top:
+            print(word + " " * (max_word_len - len(word)) + f" | {count}")
+    else:
+        for word, count in top:
+            print(f"{word}:{count}")
+
+
+text = input()
+text_stat(text)
+```
 
 Программа читает одну строку из stdin, нормализует текст и печатает:
 
