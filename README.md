@@ -23,11 +23,13 @@ python_labs/
 │   ├── lab01/
 │   ├── lab02/
 │   └── lab03/
+│   └── lab04/
 │
 ├── src/
 │   ├── lab01/
 │   ├── lab02/
 │   ├── lab03/
+│   └── lab04/
 │   └── lib/
 │
 └── README.md
