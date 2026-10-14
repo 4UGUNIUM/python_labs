@@ -2,6 +2,7 @@ from src.lib.text import normalize, tokenize, top_n, count_freq
 from src.lab04.io_txt_csv import read_text, write_csv
 from pathlib import Path 
 import argparse
+import sys
     
     
 def text_report(path: str | Path, out: str | Path, encoding: str = "utf-8"):
@@ -98,19 +99,25 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    # ★ Несколько файлов
-    if args.per_file and args.total:
-        multiple_text_report(
-            args.input_files,
-            args.per_file,
-            args.total,
-            args.encoding
-        )
+    if bool(args.per_file) != bool(args.total):
+        parser.error("для режима нескольких файлов нужно указать и --per-file, и --total")
 
-    # Обычный режим
-    else:
-        text_report(
-            args.input_files[0],
-            args.out,
-            args.encoding
-        )
+    try:
+        # ★ Несколько файлов
+        if args.per_file and args.total:
+            multiple_text_report(
+                args.input_files,
+                args.per_file,
+                args.total,
+                args.encoding
+            )
+        # Обычный режим
+        else:
+            text_report(
+                args.input_files[0],
+                args.out,
+                args.encoding
+            )
+    except (OSError, UnicodeDecodeError) as error:
+        print(f"Ошибка работы с файлом: {error}", file=sys.stderr)
+        sys.exit(1)
