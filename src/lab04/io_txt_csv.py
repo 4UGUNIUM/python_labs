@@ -31,7 +31,7 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
     if header is not None:
         for row in rows:
             if len(row) != len(header):
-                raise ValueError("Длина строки не совпадает с длиной заголовка")
+                raise ValueError("Длина массива строки не совпадает с длиной массива заголовка")
 
     ensure_parent_dir(p)
     with p.open("w", newline="", encoding="utf-8") as file:
@@ -52,6 +52,6 @@ def ensure_parent_dir(path: str | Path) -> None:
 
 
 
-# txt = read_text("src/data/lab04/input.txt")  # должен вернуть строку
-# write_csv([("word","count"),("test",3)], "src/data/check.csv")  # создаст CSV
-# # print(txt)
+txt = read_text("src/data/lab04/input.txt")  # должен вернуть строку
+write_csv([("word","count"),("test",3)], "src/data/check.csv")  # создаст CSV
+print(txt)

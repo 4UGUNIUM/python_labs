@@ -12,8 +12,10 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     Comtext = text
     if yo2e:
         Comtext = Comtext.replace("ё", "е").replace("Ё", "Е")
-    if casefold:
+    if casefold == True:
         Comtext = Comtext.casefold()
+    else:
+        Comtext = Comtext.lower()
 
     Comtext = ' '.join(Comtext.split())
     return Comtext
