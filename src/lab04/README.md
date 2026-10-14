@@ -5,16 +5,28 @@
 ## Структура
 
 ```text
-src/
-├── lab04/
-│   ├── io_txt_csv.py
-│   ├── text_report.py
-│   └── README.md
-├── lib/
-│   └── text.py
-└── data/lab04/
-    ├── input.txt
-    └── report.csv
+python_labs/
+├── images/
+│   └── lab04/
+│       ├── img01.png
+│       ├── img02.png
+│       ├── img03.png
+│       ├── img04.png
+│       ├── img05.png
+│       ├── img06.png
+│       ├── img07.png
+│       ├── img08.png
+│       └── img09.png
+└── src/
+    ├── lab04/
+    │   ├── io_txt_csv.py
+    │   ├── text_report.py
+    │   └── README.md
+    ├── lib/
+    │   └── text.py
+    └── data/lab04/
+        ├── input.txt
+        └── report.csv
 ```
 
 ## Задание A — `io_txt_csv.py`
@@ -69,6 +81,14 @@ word,count
 
 Если входной файл пуст, содержит только пробелы или в нём нет слов, CSV содержит только строку `word,count`, а в консоли выводятся нулевые значения и пустой топ-5.
 
+Пример фактического запуска с текстом `Hello Python!`:
+
+![Запуск text_report.py с текстом Hello Python](../../images/lab04/img03.png)
+
+Созданный файл `report.csv`:
+
+![Содержимое report.csv](../../images/lab04/img04.png)
+
 ## Несколько файлов ★
 
 Дополнительный режим записывает частоты каждого файла отдельно в `file,word,count`, а также суммарные частоты в `word,count`. В качестве значения `file` используется имя файла без родительского пути.
@@ -79,24 +99,40 @@ python -m src.lab04.text_report --in src/data/lab04/a.txt src/data/lab04/b.txt -
 
 `report_per_file.csv` сортируется по имени файла, затем по частоте по убыванию и слову по алфавиту. `report_total.csv` сортируется по частоте по убыванию и слову по алфавиту.
 
+Входные файлы для проверки:
+
+![Содержимое a.txt](../../images/lab04/img05.png)
+
+![Содержимое b.txt](../../images/lab04/img06.png)
+
+Результат ★ — частоты отдельно по каждому файлу:
+
+![Содержимое report_per_file.csv](../../images/lab04/img07.png)
+
+Общий результат ★:
+
+![Содержимое report_total.csv](../../images/lab04/img09.png)
+
+Для сравнения отдельно запускался обычный режим только для `b.txt`; его результат сохранён в `report_single.csv`:
+
+![Отдельный отчёт по b.txt](../../images/lab04/img08.png)
+
 ## Проверка функций ввода-вывода
 
 ```python
 from src.lab04.io_txt_csv import read_text, write_csv
 
 text = read_text("src/data/lab04/input.txt")
-write_csv([("test", 3)], "src/data/lab04/check.csv", ("word", "count"))
+write_csv([("test", 3)], "src/data/check.csv", ("word", "count"))
 ```
 
-## Скриншоты
+Ручной запуск проверки:
 
-Скриншоты запуска и результата нужно добавить в `images/lab04/` и вставить здесь, например:
+![Запуск проверки задания A](../../images/lab04/img01.png)
 
-```markdown
-![Запуск программы](../../images/lab04/img01.png)
-```
+Созданный файл `check.csv`:
 
-Сейчас папка `images/lab04/` отсутствует в локальном проекте, поэтому скриншоты в этот отчёт пока не вставлены.
+![Содержимое check.csv](../../images/lab04/img02.png)
 
 ## Вывод
 
