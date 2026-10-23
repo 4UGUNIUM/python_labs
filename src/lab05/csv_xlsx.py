@@ -1,6 +1,5 @@
 import csv
 from pathlib import Path
-from openpyxl import Workbook
 
 
 def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
@@ -8,6 +7,13 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
     Первая строка CSV — заголовок. Лист называется Sheet1,
     ширина колонок подбирается по содержимому (минимум 8 символов).
     """
+    try:
+        from openpyxl import Workbook
+    except ModuleNotFoundError as error:
+        if error.name != "openpyxl":
+            raise
+        raise RuntimeError("Для создания XLSX установите openpyxl: python -m pip install openpyxl") from error
+
     source = Path(csv_path)
     target = Path(xlsx_path)
 
@@ -20,7 +26,7 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
         rows = list(csv.reader(file))
 
     if not rows or not rows[0] or not any(value.strip() for value in rows[0]):
-        raise ValueError("CSV не обнаружен или пустой или не содержит заголовка и тд(лень расписывывать)")
+        raise ValueError("CSV пустой или не содержит заголовка")
 
     workbook = Workbook()
     sheet = workbook.active
