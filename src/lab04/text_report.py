@@ -2,7 +2,6 @@ from src.lib.text import normalize, tokenize, top_n, count_freq
 from src.lab04.io_txt_csv import read_text, write_csv
 from pathlib import Path 
 import argparse
-import sys
     
     
 def text_report(path: str | Path, out: str | Path, encoding: str = "utf-8"):
@@ -45,21 +44,21 @@ def multiple_text_report(paths: list[str], per_file: str | Path, total: str | Pa
             continue
         freq = count_freq(tokens)
 
-        # Данные отдельно по каждому файлу
+        #Названия Файлов 
         for word, count in freq.items():
             per_file_rows.append( (Path(path).name, word, count) ) #Path(path).name берет имя крч
 
-        # Общая частота слов во всех файлах
+        # Общая частота
         for word, count in freq.items():
             if word in total_freq:
                 total_freq[word] += count
             else:
                 total_freq[word] = count
 
-    # Сортировка отчёта по каждому файлу
+    #сортировка отчёта по каждому файл
     per_file_rows.sort(key=lambda item: (item[0], -item[2], item[1]))
 
-    # Общий отчёт
+    #Общий отчёт
     total_rows = list(total_freq.items())
     total_rows.sort(key=lambda item: (-item[1], item[0]))
 
@@ -99,25 +98,19 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if bool(args.per_file) != bool(args.total):
-        parser.error("для режима нескольких файлов нужно указать и --per-file, и --total")
+    # ★ Несколько файлов
+    if args.per_file and args.total:
+        multiple_text_report(
+            args.input_files,
+            args.per_file,
+            args.total,
+            args.encoding
+        )
 
-    try:
-        # ★ Несколько файлов
-        if args.per_file and args.total:
-            multiple_text_report(
-                args.input_files,
-                args.per_file,
-                args.total,
-                args.encoding
-            )
-        # Обычный режим
-        else:
-            text_report(
-                args.input_files[0],
-                args.out,
-                args.encoding
-            )
-    except (OSError, UnicodeDecodeError) as error:
-        print(f"Ошибка работы с файлом: {error}", file=sys.stderr)
-        sys.exit(1)
+    # Обычный режим
+    else:
+        text_report(
+            args.input_files[0],
+            args.out,
+            args.encoding
+        )

@@ -14,6 +14,7 @@
 | 2 | Списки, кортежи и матрицы | [Открыть README](src/lab02/README.md) |
 | 3 | Тексты и частоты слов | [Открыть README](src/lab03/README.md) |
 | 4 | работа с файлами и текстами | [Открыть README](src/lab04/README.md) |
+| 5 | JSON и конвертации | [Открыть README](src/lab05/README.md) |
 
 ## Структура
 
