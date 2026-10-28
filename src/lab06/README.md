@@ -40,6 +40,10 @@ python -m src.lab06.cli_text cat --input src/data/lab06/people.txt -n
 2: Python и мир.
 ```
 
+Скриншот запуска `cat` с нумерацией:
+
+![Вывод команды cat -n](../../images/lab06/cat_lines.png)
+
 `stats` считает общее количество слов, число уникальных слов и выводит топ частот. По умолчанию показываются 5 слов; число можно изменить через `--top`.
 
 ```powershell
@@ -56,6 +60,10 @@ python:2
 мир:2
 привет:2
 ```
+
+Скриншот запуска `stats --top 3`:
+
+![Вывод команды stats --top 3](../../images/lab06/stats_top3.png)
 
 Подсчёт использует `normalize`, `tokenize`, `count_freq` и `top_n` из `src/lib/text.py`.
 
@@ -76,6 +84,14 @@ python -m src.lab06.cli_convert csv2xlsx --in src/data/lab06/people.csv --out sr
 ```
 
 Результаты сохраняются в `src/data/lab06/out/`. JSON↔CSV вызывает функции из ЛР5; CSV→XLSX использует `csv_to_xlsx` из ЛР5.
+
+Пример созданного CSV после конвертации:
+
+![Результат JSON в CSV](../../images/lab06/json_to_csv_output.png)
+
+Результат команды `csv2xlsx`, открытый в табличном редакторе:
+
+![Результат преобразования CSV в XLSX](../../images/lab06/people_xlsx.png)
 
 Для XLSX необходим `openpyxl`. Установить зависимости можно из корня проекта:
 

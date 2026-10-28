@@ -42,3 +42,5 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
 
     target.parent.mkdir(parents=True, exist_ok=True)
     workbook.save(target)
+
+csv_to_xlsx("src/data/lab06/out/people.csv", "src/data/output.xlsx")

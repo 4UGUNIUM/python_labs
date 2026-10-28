@@ -39,10 +39,14 @@ src/data/lab05/
 
 ```json
 [
-  {"name": "Анна", "city": "Москва"},
-  {"name": "Иван", "age": 20}
+  {"name": "Alice", "age": 22},
+  {"name": "Bob", "age": 25}
 ]
 ```
+
+Пример JSON-файла:
+
+![Пример people.json](../../images/lab05/people_json.png)
 
 Запуск JSON → CSV из корня проекта:
 
@@ -66,6 +70,10 @@ name,age,city
 Иван,20,Казань
 ```
 
+Пример CSV-файла:
+
+![Пример people.csv](../../images/lab05/people_csv.png)
+
 ## Задание B — CSV → XLSX
 
 В `csv_xlsx.py` функция `csv_to_xlsx(csv_path, xlsx_path)` переносит строки CSV в книгу Excel. Первая строка используется как заголовок, лист называется `Sheet1`, ширина каждого столбца подстраивается по содержимому и не бывает меньше 8 символов.
@@ -75,6 +83,10 @@ python -c "from src.lab05.csv_xlsx import csv_to_xlsx; csv_to_xlsx('src/data/lab
 ```
 
 Откройте `src/data/lab05/out/people.xlsx` в Excel или LibreOffice и проверьте заголовки, данные и ширину столбцов.
+
+Результат — лист `Sheet1` с данными из CSV:
+
+![Результат преобразования CSV в XLSX](../../images/lab05/people_xlsx.png)
 
 ## Проверка ошибок и допущения
 
