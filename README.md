@@ -16,6 +16,8 @@
 | 4 | работа с файлами и текстами | [Открыть README](src/lab04/README.md) |
 | 5 | JSON и конвертации | [Открыть README](src/lab05/README.md) |
 | 6 | CLI-утилиты с argparse | [Открыть README](src/lab06/README.md) |
+| 7 | Поиск, сортировки и измерение времени | [Открыть README](src/lab07/README.md) |
+| 8 | Модель Student и JSON | [Открыть README](src/lab08/README.md) |
 
 ## Структура
 

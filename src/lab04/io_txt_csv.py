@@ -52,6 +52,7 @@ def ensure_parent_dir(path: str | Path) -> None:
 
 
 
-txt = read_text("src/data/lab04/input.txt")  # должен вернуть строку
-write_csv([("word","count"),("test",3)], "src/data/check.csv")  # создаст CSV
-print(txt)
+if __name__ == "__main__":
+    txt = read_text("src/data/lab04/input.txt")
+    write_csv([("word", "count"), ("test", 3)], "src/data/check.csv")
+    print(txt)
