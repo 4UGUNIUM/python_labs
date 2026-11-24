@@ -47,6 +47,10 @@ print(format_student(student))  # возраст зависит от текущ�
 {"fio": "Иванов Иван Иванович", "birthdate": "2007-09-20", "group": "БИВТ-26-6-1", "gpa": 4}
 ```
 
+Входной JSON и запуск загрузки с последующим сохранением:
+
+![Входной JSON и запуск сериализации](../../images/lab08/students_input.png)
+
 После загрузки и сохранения:
 
 ```json
@@ -57,6 +61,10 @@ print(format_student(student))  # возраст зависит от текущ�
   "gpa": 4.0
 }
 ```
+
+Полученный файл students_output.json:
+
+![Результат сохранения JSON](../../images/lab08/students_output.png)
 
 Файлы находятся в **data/lab08 в корне репозитория**, отдельно от src/data:
 
@@ -79,6 +87,10 @@ python -c "from src.lab08.serialize import students_from_json; students_from_jso
 
 ## Задание со звёздочкой
 
+CSV-файл для загрузки студентов:
+
+![Исходный CSV со студентами](../../images/lab08/students_csv.png)
+
 ```python
 from src.lab08.models import update_student
 from src.lab08.serialize import students_from_csv
@@ -98,7 +110,7 @@ update_student сначала проверяет имена полей, зате
 
 Корректный JSON загружается и сохраняется без потери полей; целочисленный GPA становится float. Возраст учитывает наступление дня рождения. Обновление возвращает независимый словарь, CSV загружается с числовым GPA. Дополнительный check.py с assert удалён: он не требуется ТЗ.
 
-Скриншоты запусков пока не добавлены.
+Выше добавлены скриншоты входного JSON, запуска сериализации, выходного JSON и исходного CSV.
 
 ## Устойчивость ввода
 
