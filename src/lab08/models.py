@@ -38,6 +38,8 @@ def make_student(fio, birthdate, group, gpa):
 def student_age(rec, today=None):
     validate_student(rec)
     today = date.today() if today is None else today
+    if type(today) is not date:
+        raise ValueError("today: требуется объект datetime.date")
     birthday = date.fromisoformat(rec["birthdate"])
     if today < birthday:
         raise ValueError("today: дата раньше рождения")
@@ -60,3 +62,15 @@ def student_to_dict(rec):
 def student_from_dict(d):
     validate_student(d)
     return make_student(**d)
+
+
+def update_student(rec, **fields):
+    """Новая запись с изменёнными полями; исходная не меняется."""
+    for field in fields:
+        if field not in STUDENT_FIELDS:
+            raise KeyError(field)
+    validate_student(rec)
+    updated = rec.copy()
+    updated.update(fields)
+    validate_student(updated)
+    return make_student(**updated)
